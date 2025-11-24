@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keranjang Belanja - Roti 515</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Sedikit tambahan agar modal kelihatan rapi */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      overflow: auto;
+    }
+    .modal-content {
+      background: #f1ad38;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+    }
+    .close {
+      position: absolute;
+      top: 10px; right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    button.btn {
+      background: #c97b3c;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button.btn:hover {
+      background: #a15e29;
+    }
+
+    
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">ROTI<span>515</span></div>
+    <nav>
+      <ul>
+        <li><a href="index.php">← Kembali</a></li>
+        <li><a href="#">Keranjang</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Produk -->
+  <section id="produk" class="produk section">
+    <h2>Belanja Produk</h2>
+    <div class="produk-container">
+      <div class="card" data-price="4000" data-name="Roti Marie Kelapa">
+        <img src="rm.jpg" alt="Marie Kelapa">
+        <h3>Roti Marie Kelapa</h3>
+        <p>Kelapanya yang nagih, renyah tiap gigitan!</p>
+        <p class="harga">Rp4.000</p>
+        <div class="quantity">
+          <button class="minus">-</button>
+          <span class="jumlah">0</span>
+          <button class="plus">+</button>
+        </div>
+      </div>
+
+      <div class="produk-container">
+
+  <div class="card" data-id="1" data-price="4000" data-name="Bolu Plemben">
+    <img src="rp.jpg" alt="Bolu Plemben">
+    <h3>Bolu Plemben</h3>
+    <p>Gurih, manis, dan bikin ketagihan.</p>
+    <p class="harga">Rp4.000</p>
+    <div class="quantity">
+      <button class="minus">-</button>
+      <input type="number" class="jumlah" value="0" min="0">
+      <button class="plus">+</button>
+    </div>
+  </div>
+
+  <div class="card" data-id="2" data-price="4500" data-name="Roti Wijen">
+    <img src="rw.jpg" alt="Roti Wijen">
+    <h3>Roti Wijen</h3>
+    <p>Roti dengan rasa premium.</p>
+    <p class="harga">Rp4.500</p>
+    <div class="quantity">
+      <button class="minus">-</button>
+      <input type="number" class="jumlah" value="0" min="0">
+      <button class="plus">+</button>
+    </div>
+  </div>
+
+  <div class="card" data-id="3" data-price="4000" data-name="Onde Onde Ketawa">
+    <img src="onde onde guyon.jpg" alt="Onde onde guyon">
+    <h3>Onde Onde Ketawa</h3>
+    <p>Roti yang selalu bikin bahagia.</p>
+    <p class="harga">Rp4.000</p>
+    <div class="quantity">
+      <button class="minus">-</button>
+      <input type="number" class="jumlah" value="0" min="0">
+      <button class="plus">+</button>
+    </div>
+  </div>
+
+  <div class="card" data-id="4" data-price="4000" data-name="Roti Susu">
+    <img src="rs.jpg" alt="Roti Susu">
+    <h3>Roti Susu</h3>
+    <p>Lembut, manis, dan nagih.</p>
+    <p class="harga">Rp4.000</p>
+    <div class="quantity">
+      <button class="minus">-</button>
+      <input type="number" class="jumlah" value="0" min="0">
+      <button class="plus">+</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Total Belanja -->
+<div class="total-belanja">
+  <h3>Total Belanja: <span id="total-harga">Rp0</span></h3>
+  <p><strong>Jumlah Item:</strong> <span id="total-item">0</span></p>
+  <button class="btn" id="checkout">Checkout</button>
+</div>
+
+<!-- Modal Checkout -->
+<div id="checkoutModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Form Checkout</h2>
+
+    <form id="checkoutForm" action="checkout.php" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="jenis_customer" id="jenis_customer">
+      <input type="hidden" name="total_harga" id="input-total-harga">
+      <input type="hidden" name="daftar_item" id="input-daftar-item">
+
+      <label>Nama Lengkap</label>
+      <input type="text" name="nama" required>
+
+      <label>No HP</label>
+      <input type="text" name="wa" required>
+
+      <label>Metode Pembayaran</label>
+      <select id="metode" name="metode">
+        <option value="cod">COD</option>
+        <option value="transfer">Transfer</option>
+      </select>
+
+      <div id="transferArea" style="display:none;">
+        <label>Bukti Pembayaran</label>
+        <input type="file" name="bukti" id="bukti" accept="image/*">
+      </div>
+
+      <button type="submit" class="btn">Kirim Pesanan</button>
+    </form>
+  </div>
+</div>
+
+      <!-- Data Pelanggan -->
+  <label>Nama</label>
+  <input type="text" name="nama" required style="padding: 6px; border-radius: 5px; border: 1px solid #ccc;">
+
+  <label>Nomor Telp / WA</label>
+<input type="tel" name="no_telp" required style="padding: 6px; border-radius: 5px; border: 1px solid #ccc;">
+
+  <label>Alamat</label>
+  <textarea name="alamat" required style="padding: 6px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+
+  <label>Metode Pembayaran</label>
+  <select id="metode" name="metode_pembayaran" required style="padding: 6px; border-radius: 5px; border: 1px solid #ccc;">
+    <option value="">--Pilih Metode--</option>
+    <option value="transfer">Transfer Bank</option>
+    <option value="cod">Cash on Delivery (COD)</option>
+    <option value="ovo">OVO</option>
+  </select>
+
+  <!-- Area khusus Transfer -->
+  <div id="transferArea" style="display:none; margin-top:10px;">
+    <p><strong>Transfer ke rekening:</strong></p>
+    <p id="noRek">BCA 123-456-789 a.n. Roti 515</p>
+
+    <label>Bukti Pembayaran (upload file gambar)</label>
+    <input type="file" name="bukti" id="bukti" accept="image/*" 
+           style="padding: 6px; border-radius: 5px; border: 1px solid #ccc;">
+    <small>Format: JPG/PNG. Maks 2MB.</small>
+  </div>
+
+  <button type="submit" name="pesan" 
+          style="background: #a15e29; color: #fff; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
+          Pesan Sekarang
+  </button>
+</form>
+
+    </div>
+  </div>
+
+  <script src="keranjang.js"></script>
+</body>
+</html>

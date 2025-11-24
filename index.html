@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Roti 515</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="navbar">
+    <div class="logo">ROTI<span>515</span></div>
+    <nav class="active">
+      <ul>
+        <li><a href="#home" class="active">Beranda</a></li>
+        <li><a href="tentang.php">Tentang</a></li>
+        <li><a href="produk.php">Produk</a></li>
+        <li><a href="kontak.php">Kontak</a></li>
+            <li class="cart-icon">
+          <a href="keranjang.php">
+            🛒 Keranjang
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-text" data-aos="fade-up">
+      <h1>Roti Tradisional Kualitas Premium</h1>
+      <p>Hangat dari oven setiap pagi, Menghadirkan rasa rumahan yang menyulap setiap gigitan jadi momen bahagia.
+        Temukan berbagai makanan ringan kekinian yang bikin harimu makin seru.</p>
+      <a href="#produk" class="btn">Lihat Produk</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+<section id="about" class="about section">
+  <div class="about-container">
+    <div class="about-image">
+      <img id="aboutImage" src="12.jpg" alt="Tentang Kami">
+    </div>
+    <div class="about-text">
+      <h2>Tentang Kami</h2>
+      <h1>ROTI 515</h1>
+      <p>Usaha roti kering yang dikelola oleh narasumber diberi nama 515, penamaan ini diambil dari nama pemilik yaitu Siswanto (SIS) sebagai identitas unik (515). UMKM ini memproduksi berbagai produk roti kering, antara lain Roti Susu, Pia Kacang, Bolu Plemben, Onde-Onde Ketawa, Roti Marie Kelapa, Roti Wijen.</p>
+      <p>Pemilik menyampaikan bahwa motivasi utama memulai usaha adalah untuk menciptakan lapangan kerja serta tetap dekat dengan keluarga tanpa harus bekerja jauh dari kampung halaman.</p>
+    </div>
+  </div>
+</section>
+
+  <!-- Produk Section -->
+  <section id="produk" class="produk section">
+    <h2>Produk Unggulan</h2>
+    <div class="produk-container">
+      <div class="card">
+        <img src="pk.jpg" alt="Pia Kacang">
+        <h3>Pia Kacang</h3>
+        <p>Pedasnya nagih, renyah tiap gigitan!</p>
+      </div>
+      <div class="card">
+        <img src="rm.jpg" alt="Roti Marie Kelapa">
+        <h3>Roti Marie Kelapa</h3>
+        <p>Gurih, manis, dan bikin ketagihan.</p>
+      </div>
+      <div class="card">
+        <img src="rp.jpg" alt="Roti Plemben">
+        <h3>Roti Plemben</h3>
+        <p>Lumer di mulut dengan aroma coklat premium.</p>
+      </div>
+      <div class="card">
+        <img src="rw.jpg" alt="Roti Wijen">
+        <h3>Roti Wijen</h3>
+        <p>Lumer di mulut dengan aroma coklat premium.</p>
+      </div>
+      <div class="card">
+        <img src="oog.jpg" alt="Onde-Onde Ketawa">
+        <h3>Onde-Onde Ketawa</h3>
+        <p>Lumer di mulut dengan aroma coklat premium.</p>
+      </div>
+    <div class="card">
+        <img src="rs.jpg" alt="Roti Susu">
+        <h3>Roti Susu</h3>
+        <p>Lumer di mulut dengan aroma coklat premium.</p>
+      </div>
+    </div>
+  </section>
+
+<!-- Kontak Section -->
+  <section id="kontak" class="kontak section">
+  <h2>Hubungi Kami</h2>
+  <p>WhatsApp: <a href="https://wa.me/6285940947728" target="_blank" rel="noopener noreferrer">+62 859-4094-7728</a></p>
+  <p>Instagram: <a href="https://www.instagram.com/roti_515" target="_blank" rel="noopener noreferrer">@roti_515</a></p></section>
+
+  <!-- Google Map Start -->
+  <iframe 
+  class="google-map"
+  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3269.987988573515!2d112.05252507500302!3d-7.58769999242689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zN8KwMzUnMTUuNyJTIDExMsKwMDMnMTguNCJF!5e1!3m2!1sid!2sid!4v1762795949101!5m2!1sid!2sid" 
+  allowfullscreen=""
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+<!-- Google Map End -->
+
+<!-- Kritik & Saran -->
+  <section id="kontak" class="kontak section">
+    <h2>Kritik & Saran</h2>
+    <p>Kami sangat menghargai masukan kamu agar Roti 515 terus berkembang✨</p>
+
+    <!-- Form Kritik dan Saran -->
+    <table class="form-tabel">
+      <tr>
+        <td><label for="nama">Nama</label></td>
+        <td><input type="text" id="nama" placeholder="Masukkan nama kamu..." required></td>
+      </tr>
+      <tr>
+        <td><label for="pesan">Pesan</label></td>
+        <td><textarea id="pesan" rows="3" placeholder="Tulis kritik atau saran kamu..." required></textarea></td>
+      </tr>
+    </table>
+
+    <!-- Tombol Kirim -->
+    <button id="kirimBtn">Kirim</button>
+
+    <!-- Respon Otomatis -->
+    <div id="bot-box">
+      <p id="bot-response"></p>
+    </div>
+</section>
+
+<div class="admin">
+   <a href="admin/login.php" class="btn">Login Admin</a>
+</div>
+
+<!-- ====================== SCRIPT FINAL ====================== -->
+<script>
+// >>>>> GANTI NOMOR WHATSAPP ADMIN DI SINI <<<<<
+let adminNumber = "62085755354846";  // Contoh: 628577xxxxxxx
+
+document.getElementById("kirimBtn").addEventListener("click", function () {
+    let nama = document.getElementById("nama").value.trim();
+    let pesan = document.getElementById("pesan").value.trim();
+    let botBox = document.getElementById("bot-response");
+
+    // Validasi input
+    if (nama === "" || pesan === "") {
+        botBox.textContent = "⚠ Mohon isi semua kolom.";
+        botBox.style.color = "red";
+        return;
+    }
+
+    // Format pesan WhatsApp
+let text = `Kritik & Saran Roti 515\n\nNama: ${nama}\nPesan: ${pesan}`;
+let encoded = encodeURIComponent(text);
+
+// Kirim ke WhatsApp
+let url = `https://wa.me/${adminNumber}?text=${encoded}`;
+window.open(url, "_blank");
+
+
+    // Respon otomatis tampil di layar
+    botBox.textContent = "Terima kasih! Masukan kamu sangat berarti ✨";
+    botBox.style.color = "green";
+
+    // Reset form
+    document.getElementById("nama").value = "";
+    document.getElementById("pesan").value = "";
+});
+</script>
+
+  <footer>
+    <p>&copy; 2025 Roti515. Semua Hak Dilindungi.</p>
+  </footer>
+
+  <!-- Tombol Back to Top -->
+  <button id="backToTop">⬆</button>
+
+  <div class="float-social">
+  <a href="https://wa.me/6285940947728" class="fs-btn">
+      <img src="wa.logo.png" alt="WA">
+  </a></div>
+</body>
+</html>

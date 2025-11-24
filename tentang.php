@@ -1,0 +1,65 @@
+<?php
+// tidak perlu koneksi database karena halaman ini statis
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tentang Kami - Roti 515</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <!-- Background Video -->
+  <video autoplay muted loop class="video-background">
+    <source src="updates/roti 515.mp4" type="video/mp4" />
+  </video>
+  <div class="overlay"></div>
+
+  <header class="navbar">
+    <div class="logo">ROTI<span>515</span></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="tentang.php">Tentang</a></li>
+        <li><a href="produk.php">Produk</a></li>
+        <li><a href="kontak.php">Kontak</a></li>
+        <li class="cart-icon">
+          <a href="keranjang.php">🛒 Keranjang</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Konten Tentang Kami -->
+  <section class="about-page section">
+    <div class="about-container">
+      <div class="about-image">
+        <img id="aboutImage" src="11.jpg" alt="Tentang Kami">
+      </div>
+      <div class="about-text">
+        <h2>TENTANG KAMI</h2>
+        <h1>ROTI 515</h1>
+        <p style="text-align: justify; text-indent: 25px;">
+          Usaha roti kering “ROTI 515” lahir dari semangat untuk menghadirkan cita rasa rumahan dengan kualitas premium. Usaha roti kering yang dikelola oleh narasumber diberi nama 515, penamaan ini diambil dari nama pemilik (SIS) dan di buat sebagai identitas unik.
+          Kami memproduksi berbagai roti kering seperti pia susu, pia kacang, bolu klemben, dan onde-onde ketawa yang dibuat dengan bahan pilihan dan resep turun-temurun.
+        </p>
+        <br/>
+        <p style="text-align: justify; text-indent: 25px;">
+          Visi kami adalah menjadi UMKM unggulan yang tidak hanya menciptakan produk lezat, tetapi juga memberikan lapangan kerja bagi masyarakat sekitar.
+          Setiap gigitan roti kami mengandung dedikasi dan cinta dari dapur ke meja Anda.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Roti 515. Semua Hak Dilindungi.</p>
+  </footer>
+
+  <!-- Tombol Back to Top -->
+  <button id="backToTop">⬆</button>
+</body>
+</html>
