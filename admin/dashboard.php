@@ -4,7 +4,7 @@ if(!isset($_SESSION['admin'])){
     header("Location: login.php");
     exit;
 }
-a
+
 include('../database/koneksi.php');
 ?>
 <!DOCTYPE html>
