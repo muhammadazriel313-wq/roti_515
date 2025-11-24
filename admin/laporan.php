@@ -59,7 +59,7 @@ include('../database/koneksi.php');
             <th>Status</th>
             <th>Tanggal</th>
             <th>✔</th>
-            <th>❌</th>
+            <th>🗑</th>
           </tr>
         </thead>
         <tbody>
@@ -82,7 +82,7 @@ include('../database/koneksi.php');
                     <a class='btn-hapus' 
                        href='hapus_laporan.php?id=".$laporan['id']."' 
                        onclick='return confirm(\"Yakin ingin menghapus laporan ini?\")'>
-                       ❌
+                       🗑
                     </a>
                   </td>";
 
