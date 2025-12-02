@@ -81,7 +81,7 @@ img { border-radius: 10px; margin-top: 10px; }
     <h2>Detail Pesanan #<?php echo $pesanan['id']; ?></h2>
 
     <p><strong>Nama:</strong> <?php echo $pesanan['nama_pembeli']; ?></p>
-    <p><strong>No. Telpon:</strong> <?php echo $pesanan['email']; ?></p>
+    <p><strong>No. Telpon:</strong> <?php echo $pesanan['no_telpon']; ?></p>
     <p><strong>Alamat:</strong> <?php echo $pesanan['alamat']; ?></p>
     <p><strong>Metode Pembayaran:</strong> <?php echo $pesanan['metode_pembayaran']; ?></p>
     <p><strong>Status:</strong> <span><?php echo $pesanan['status']; ?></span></p>
@@ -106,20 +106,21 @@ img { border-radius: 10px; margin-top: 10px; }
 
     <p><strong>Total:</strong> Rp<?php echo number_format($pesanan['total_harga'],0,',','.'); ?></p>
 
+    <?php if (!empty($pesanan['bukti_pembayaran'])): ?>
+        <h3>Bukti Pembayaran:</h3>
+        <img src="../uploads/<?php echo $pesanan['bukti_pembayaran']; ?>" width="250">
+    <?php else: ?>
+        <p><em>Belum ada bukti pembayaran.</em></p>
+    <?php endif; ?>
+
     <!-- FORM UPDATE STATUS -->
     <form method="POST" action="ubah_status.php" style="margin-top:20px;">
         <input type="hidden" name="id" value="<?php echo $pesanan['id']; ?>">
         <input type="hidden" name="nama_pembeli" value="<?php echo $pesanan['nama_pembeli']; ?>">
-        <input type="hidden" name="email" value="<?php echo $pesanan['email']; ?>">
+        <input type="hidden" name="no_telpon" value="<?php echo $pesanan['no_telpon']; ?>">
 
         <button type="submit" name="selesai" class="btn btn-selesai">✅ Selesaikan Pesanan</button>
         <button type="submit" name="batalkan" class="btn btn-batal" onclick="return confirm('Yakin ingin membatalkan?')">❌ Batalkan Pesanan</button>
-        <button type="submit" name="dibayar" class="btn btn-selesai" style="background:#28a745;">
-        💰 Sudah Dibayar
-        </button>
-        <a href="hapus_pesanan.php?id=<?php echo $pesanan['id']; ?>" 
-           class="btn btn-batal"
-           onclick="return confirm('Hapus permanen pesanan ini? Semua datanya hilang!')">🗑 Hapus Permanen</a>
         <a href="dashboard.php" class="btn btn-back">← Kembali</a>
     </form>
 

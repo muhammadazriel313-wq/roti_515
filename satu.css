@@ -1,0 +1,509 @@
+    /* ===== Tambahkan CSS ini untuk memperbaiki Navigasi ===== */
+    /* Pastikan navbar selalu di paling atas */
+    .navbar {
+      position: fixed; /* Pastikan navbar menempel di atas saat scroll */
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 2000; /* Nilai tinggi agar berada di atas slider */
+      background-color: rgba(0, 0, 0, 0.7); /* Opsional: tambah background agar teks terlihat jelas di atas gambar */
+      backdrop-filter: blur(5px); /* Efek kaca buram yang modern */
+      object-fit: contain;
+    }
+
+    /* Tambahkan padding pada body agar konten tidak tertutup navbar */
+    body {
+      padding-top: 5px; /* Sesuaikan dengan tinggi navbar Anda */
+    }
+    
+    /* ===================================================== */
+
+    /* Tambahan CSS untuk image slider */
+    /* ===== IMAGE SLIDER DENGAN EFEK GESER (SLIDE) ===== */
+.image-slider {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.slider-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  transition: transform 0.8s ease-in-out; /* Efek geser halus */
+}
+
+.image-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.image-slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  margin-top: 60px;
+}
+
+/* Kontrol & dots tetap sama */
+.slider-controls {
+  position: absolute;
+  top: 60%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.slider-btn {
+  pointer-events: all;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  border-radius: 50%;
+  margin: 0 20px;
+  transition: all 0.3s;
+}
+
+.slider-btn:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  transform: scale(1.1);
+}
+    
+    .slider-dots {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 5; /* Z-index lebih rendah dari navbar */
+      margin-top: 800px;
+    }
+    
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      transition: background-color 0.3s;
+    }
+    
+    .dot.active {
+      background-color: white;
+    }
+    
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      z-index: 5; /* Z-index lebih rendah dari navbar */
+      width: 80%;
+      max-width: 1000px;
+      height: auto;
+    }
+    
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Bayangan lebih tebal untuk keterbacaan */
+    }
+    
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Bayangan lebih tebal untuk keterbacaan */
+    }
+    
+    .hero-content .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #f1ad38;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .hero-content .btn:hover {
+      background-color: #d18f2c;
+    }
+
+    .navbar img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .logo {
+      margin-right: 565px;
+      margin-top: 18px;
+    }
+    
+    /* Responsif untuk layar lebih kecil */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .hero-content p {
+        font-size: 1rem;
+      }
+      .slider-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        margin: 0 10px;
+      }
+    }
+  /* === NAVBAR === */
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 20px;
+}
+
+/* Tombol logo bisa diklik */
+.nav-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-toggle img {
+  width: 50px;
+  height: 50px;
+}
+
+.nav-toggle .logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Menu utama */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  transition: 0.3s ease;
+}
+
+/* Mode HP (menu disembunyikan dulu) */
+@media (max-width: 800px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background: rgba(0,0,0,0.85);
+    width: 100%;
+    padding: 15px 0;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+
+  nav ul.show {
+    display: flex;
+  }
+}
+
+
+.admin {
+  text-align: center; /* Untuk membuat tombol di tengah */
+  margin: 20px 0; /* Memberi jarak atas dan bawah */
+}
+
+/* ===================== DESKTOP (default) ===================== */
+.hero-desktop {
+display: block;
+  width: 100%;
+  height: auto; /* Full satu layar */
+  overflow: visible; 
+}
+
+.hero-mobile {
+  display: none;
+}
+
+/* Perbaikan video agar tidak kepotong */
+.hero-desktop video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-top: 60px;
+}
+.slider-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  transition: transform 0.8s ease-in-out; /* Efek geser halus */
+}
+
+.image-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+
+
+/* ===================== DESKTOP (default) ===================== */
+.hero-desktop {
+display: block;
+  width: 100%;
+  height: auto; /* Full satu layar */
+  overflow: visible; 
+}
+
+.hero-mobile {
+  display: none;
+}
+
+/* Perbaikan video agar tidak kepotong */
+.hero-desktop video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-top: 60px;
+}
+.slider-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  transition: transform 0.8s ease-in-out; /* Efek geser halus */
+}
+
+.image-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+
+
+/* ===================== MOBILE ===================== */
+@media (max-width: 768px) {
+
+  /* Hilangkan video ketika di mobile */
+  .hero-desktop {
+    display: none !important;
+  }
+
+  /* Aktifkan slider foto */
+  .hero-mobile {
+    display: block !important;
+  }
+
+  /* Foto tidak crop */
+  .hero-mobile .photo-slide {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: none;
+    margin-top: 70px;
+  }
+
+  /* Batasi tinggi hero agar tidak terlalu panjang */
+  .photo-slider {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+  .about section{
+    margin-right: 50px;
+  }
+}
+.about section{
+  margin-top: 50px;
+}
+.about-container{
+  margin-top: 150px;
+}
+/* Hamburger (3 garis) */
+.hamburger {
+  display: none; /* sembunyikan di desktop */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 22px;
+  z-index: 2001;
+  position: absolute;
+  top: 15px;
+  right: 90px;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px,5px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px,-5px);
+}
+
+/* Misal navbar tingginya 60px */
+.mobile-menu {
+  position: fixed;
+  top: 70px; /* di bawah navbar */
+  right: 0;
+  width: 420px;
+  max-height: 0;
+  overflow: hidden;
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(5px);
+  flex-direction: column;
+  gap: 20px;
+  z-index: 9999;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+}
+
+.mobile-menu.show {
+  max-height: 500px; /* cukup untuk semua link */
+  padding: 80px 20px;
+}
+
+/* Hamburger tampil di HP */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+    margin-right: 0;
+    margin-top: 20px;
+  }
+}
+
+/* Desktop hide hamburger */
+@media (min-width: 769px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background: rgba(0,0,0,0.95);
+    width: 100%;
+    padding: 15px 0;
+    margin-top: 70px; /* tinggi navbar */
+    border-radius: 5px;
+  }
+  nav ul.show {
+    display: flex;
+}
+}
+/* ==== MOBILE NAVBAR FIX ==== */
+@media (max-width: 768px) {
+
+  /* Navbar tetap ramping */
+  .navbar {
+    padding: 10px 20px;
+    height: 60px;
+  }
+
+  .logo {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .nav-toggle img {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Sembunyikan menu desktop */
+  nav ul {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 10px; /* tepat di bawah navbar */
+    right: -130%; /* sembunyikan awal */
+    width: 420px;
+    background: rgba(0,0,0,0.95);
+    padding: 20px;
+    border-radius: 0 0 0 10px;
+    transition: right 0.3s ease;
+    z-index: 2000;
+  }
+
+  nav ul.show {
+    right: -100px;
+  }
+
+  /* Hamburger muncul di mobile */
+  .hamburger {
+    display: flex;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    z-index: 2001;
+  }
+}
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden; /* mencegah scroll horizontal global */
+  }
+
+  /* Kontainer scrollable untuk konten yang lebih lebar */
+  .about-container,
+  .produk-container,
+  .photo-slider {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-x: auto;   /* konten bisa digeser sendiri */
+    -webkit-overflow-scrolling: touch; /* smooth scroll di iOS */
+  }
+
+  /* Pastikan semua elemen di dalamnya menyesuaikan lebar */
+  .about-container > *, 
+  .produk-container > *{
+    flex-shrink: 0;     /* jangan diperkecil otomatis */
+    max-width: 100%;    /* tetap maksimal 100% layar */
+}
+
+  /* Tambahkan padding untuk jarak dari tepi layar */
+  .about-container,
+  .produk-container{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  /* Gambar/video/card responsive */
+  .card {
+    width: auto;   /* biarkan menyesuaikan proporsional */
+    max-width: 100%;
+    height: auto;
+  }
+  .admin {
+  margin-left: 33%;
+}
+.about-container {
+  margin-top: -80px;
+}
+}
+

@@ -47,6 +47,8 @@ include('../database/koneksi.php');
     <ul>
       <li><a href="dashboard.php">📦 Pesanan</a></li>
       <li><a href="produk.php" class="active">🍞 Produk</a></li>
+      <li><a href="pelanggan.php">👤 Pelanggan</a></li>
+      <li><a href="laporan.php">📊 Laporan</a></li>
       <li><a href="logout.php" class="logout">🚪 Logout</a></li>
     </ul>
   </div>
@@ -80,7 +82,13 @@ include('../database/koneksi.php');
     <!-- Form Tambah Stok -->
     <section class="cards">
       <h3>Tambah Stok Produk</h3>
-      <form method="post">
+<?php
+if(isset($_SESSION['flash_stok'])){
+    echo "<p style='color:#00ff88;margin-top:10px;'>".$_SESSION['flash_stok']."</p>";
+    unset($_SESSION['flash_stok']); // hapus pesan setelah ditampilkan sekali
+}
+?>
+      <form method="post" action="tambah_stok.php">
         <label>Produk:</label>
         <select name="id_produk">
           <?php

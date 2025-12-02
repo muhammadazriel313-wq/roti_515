@@ -11,10 +11,10 @@ if (isset($_POST['id'])) {
     if ($data) {
         // Tambahkan ke tabel laporan
         $insert = mysqli_query($koneksi, "INSERT INTO laporan 
-          (nama_pembeli, email, alamat, total_harga, metode_pembayaran, status, tanggal)
+          (nama_pembeli, no_telpon, alamat, total_harga, metode_pembayaran, status, tanggal)
           VALUES (
             '".$data['nama_pembeli']."',
-            '".$data['email']."',
+            '".$data['no_telpon']."',
             '".$data['alamat']."',
             '".$data['total_harga']."',
             '".$data['metode_pembayaran']."',

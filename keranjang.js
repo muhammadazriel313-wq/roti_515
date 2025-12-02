@@ -263,7 +263,7 @@ if (jenisCustomer === "mitra" && totalItem < 100) {
       .then(res => res.text())
       .then(() => {
         alert("Pesanan berhasil dikirim!");
-        window.location.href = "index.html";
+        window.location.href = "index.php";
       })
       .catch(err => {
         alert("Terjadi error.");

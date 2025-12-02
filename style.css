@@ -14,7 +14,6 @@ body {
   width: 100%;
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background: var(--bg-dark);
   color: var(--text-light);
   scroll-behavior: smooth;
 }
@@ -37,6 +36,7 @@ body {
 .logo {
   font-size: 1.5rem;
   font-weight: 600;
+  margin-right: 50px;
 }
 .logo span {
   color: var(--accent);
@@ -58,21 +58,6 @@ body {
 }
 
 /* ==== HERO ==== */
-.hero {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-}
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-}
 .hero-text {
   position: relative;
   max-width: 600px;
@@ -186,17 +171,12 @@ footer {
   color: #fff;
   border: none;
   border-radius: 50%;
-  cursor: pointer;
   display: none;
   box-shadow: var(--shadow);
   transition: var(--transition);
 }
 #backToTop:hover {
   transform: translateY(-4px);
-}
-.admin {
-  margin-left: 45%;
-  margin-top: -40px;
 }
 body {
   font-family: 'Poppins', sans-serif;
@@ -222,6 +202,7 @@ body {
   font-size: 1.6em;
   font-weight: bold;
   color: #f5f5f5;
+  margin-right: 50px;
 }
 .logo span {
   color: #ff6f00;
@@ -249,13 +230,6 @@ body {
 }
 
 /* Hero */
-.hero {
-  background: url('11.jpg') center/cover no-repeat;
-  text-align: center;
-  color: white;
-  width: 100%;
-  height: 600px;
-}
 .hero h1 {
   font-size: 2.5em;
 }
@@ -288,7 +262,6 @@ body {
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
-  cursor: pointer;
   font-size: 1em;
 }
 .quantity button:hover {
@@ -314,7 +287,6 @@ body {
   border: none;
   border-radius: 50%;
   padding: 10px 15px;
-  cursor: pointer;
   display: none;
 }
 #backToTop:hover {
@@ -355,7 +327,6 @@ body {
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
-  cursor: pointer;
   transition: 0.2s;
 }
 
@@ -387,7 +358,6 @@ body {
 }
 
 .about-text h2 {
-  color: #ff6f00;
   font-size: 1.8em;
   margin-bottom: 5px;
 }
@@ -456,7 +426,7 @@ body {
   margin-bottom: 10px;
   line-height: 1.7;
 }
-.about-text h2 {
+.about-text-h2 {
   margin-top: -100px;
   justify-content: center;
   margin-left: 50px;
@@ -471,27 +441,6 @@ body {
 .about-text p {
   margin-top: -10px;
   color: #ffffff;
-}
-/* ==== VIDEO BACKGROUND ==== */
-.video-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-
-/* Lapisan gelap agar teks lebih jelas */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: 0;
 }
 
 /* Pastikan isi di atas video */
@@ -555,7 +504,7 @@ footer {
 /* Modal */
 .modal { display:none; position:fixed; z-index:1000; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); }
 .modal-content { background:#fff; margin:10% auto; padding:20px; width:90%; max-width:400px; border-radius:12px; position:relative; }
-.modal-content .close { position:absolute; top:10px; right:15px; font-size:28px; cursor:pointer; }
+.modal-content .close { position:absolute; top:10px; right:15px; font-size:28px; }
 .modal {
   display: none;
   position: fixed;
@@ -576,7 +525,6 @@ footer {
   position: absolute;
   top: 10px; right: 15px;
   font-size: 28px;
-  cursor: pointer;
 }
 .kontak.section {
   padding: 50px 20px;
@@ -639,7 +587,6 @@ footer {
   border-radius: 8px;
   font-size: 1rem;
   margin-top: 15px;
-  cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
 }
 
@@ -718,7 +665,6 @@ footer {
     right: 15px;
     top: 12px;
     font-size: 22px;
-    cursor: pointer;
     color: #aaa;
     transition: 0.3s;
   }
@@ -769,7 +715,6 @@ footer {
     border: none;
     border-radius: 10px;
     font-weight: bold;
-    cursor: pointer;
     transition: 0.3s;
     font-size: 16px;
   }
@@ -818,24 +763,6 @@ footer {
   overflow-y: auto; /* tambahkan ini supaya scroll muncul saat form terlalu panjang */
 }
 
-.nota-link {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-
-}
-
-.nota-icon {
-  font-size: 18px;
-  padding: 5px;
-  border-radius: 50%;
-  background-color: #404040;
-}
-
-.nota-icon:hover {
-  background-color: rgb(192, 140, 21);
-}
-
 .fs-btn {
     width: 45px !important;
     height: 45px !important;
@@ -849,7 +776,6 @@ footer {
     color: white !important;
 
     text-decoration: none !important;
-    cursor: pointer !important;
     transition: 0.2s !important;
 
     box-shadow: 0 0 10px rgba(0,0,0,0.25) !important;

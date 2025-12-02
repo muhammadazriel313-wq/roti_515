@@ -8,6 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kontak - Roti 515</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="satu.css">
+  <script defer src="satu.js"></script>
   <style>
     /* Tambahan khusus untuk bot */
     #bot-box {
@@ -21,24 +23,58 @@
       font-weight: 600;
       color: #333;
     }
+      .navbar img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .logo {
+      margin-right: 565px;
+      margin-top: 18px;
+    }
   </style>
 </head>
 <body>
-  <header class="navbar">
-    <div class="logo">ROTI<span>515</span></div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Beranda</a></li>
-        <li><a href="tentang.php">Tentang</a></li>
-        <li><a href="produk.php">Produk</a></li>
-        <li><a href="kontak.php">Kontak</a></li>
-        <li class="cart-icon">
-          <a href="keranjang.php">🛒 Keranjang</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+ <!-- Header -->
+ <header class="navbar">
 
+  <!-- BAGIAN YANG BISA DIKLIK -->
+  <div class="nav-toggle" id="toggleMenu">
+      <img src="logo 515.png" id="logoMenu">
+      <div class="logo">ROTI<span>515</span></div>
+  </div>
+   <!-- Hamburger Menu (mobile only) -->
+<div class="hamburger" id="hamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+
+  <!-- MENU NAVBAR -->
+  <nav>
+    <ul id="menuList">
+      <li><a href="index.php" class="nav-link">Beranda</a></li>
+      <li><a href="tentang.php" class="nav-link">Tentang</a></li>
+      <li><a href="produk.php" class="nav-link">Produk</a></li>
+      <li><a href="kontak.php" class="nav-link">Kontak</a></li>
+      <li class="cart-icon">
+        <a href="keranjang.php" class="nav-link">🛒 Keranjang</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+  <!-- Kotak menu mobile overlay -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="index.php">Beranda</a></li>
+    <li><a href="tentang.php">Tentang</a></li>
+    <li><a href="produk.php">Produk</a></li>
+    <li><a href="kontak.php">Kontak</a></li>
+    <li><a href="keranjang.php">🛒 Keranjang</a></li>
+  </ul>
+</div>
   <!-- Kontak Section -->
   <section id="kontak" class="kontak section">
     <h2>Hubungi Kami</h2>

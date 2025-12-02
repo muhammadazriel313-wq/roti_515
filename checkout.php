@@ -38,47 +38,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $metode = mysqli_real_escape_string($koneksi, $_POST['metode_pembayaran']);
     $total = mysqli_real_escape_string($koneksi, $_POST['total_harga']);
     $daftar_item = $_POST['daftar_item'];
-    $jenis = mysqli_real_escape_string($koneksi, $_POST['jenis_customer']);
+    $jenis = mysqli_real_escape_string($koneksi, $_POST['jenis_customer']); // ★ JENIS PELANGGAN
 
     $bukti_file = '';
-    $status = 'Pending';
+    // Status awal 'Belum Dibayar' agar konsisten dengan logika di codingan 1
+    $status = 'Belum Dibayar';
 
     /* === UPLOAD BUKTI === */
     if ($metode === 'transfer' && isset($_FILES['bukti']) && $_FILES['bukti']['error'] === 0) {
         $ext = pathinfo($_FILES['bukti']['name'], PATHINFO_EXTENSION);
         $bukti_file = 'bukti_' . time() . '.' . $ext;
         move_uploaded_file($_FILES['bukti']['tmp_name'], 'uploads/' . $bukti_file);
+        // Jika ada bukti transfer, statusnya berubah
         $status = 'Sudah Dibayar';
-    } else {
-        $status = 'Sudah Dibayar';
+    } else if ($metode === 'cod') {
+        // Jika COD, statusnya tetap 'Belum Dibayar' sampai admin konfirmasi
+        $status = 'Belum Dibayar';
     }
 
     /* === SIMPAN PESANAN === */
-$sql = "
-INSERT INTO pesanan 
-(nama_pembeli, email, alamat, total_harga, metode_pembayaran, status, tanggal)
-VALUES 
-('$nama', '$no_telp', '$alamat', '$total', '$metode', 'Belum Dibayar', NOW())
-";
+    $sql = "INSERT INTO pesanan (nama_pembeli, no_telpon, alamat, total_harga, tanggal, metode_pembayaran, bukti_pembayaran, status)
+            VALUES ('$nama', '$no_telp', '$alamat', '$total', NOW(), '$metode', '$bukti_file', '$status')";
 
-if (mysqli_query($koneksi, $sql)) {
+    if (mysqli_query($koneksi, $sql)) {
 
-    $id_pesanan = mysqli_insert_id($koneksi);
-
+        $id_pesanan = mysqli_insert_id($koneksi);
 
         /* === SIMPAN / UPDATE PELANGGAN === */
-        $cek = mysqli_query($koneksi, "SELECT * FROM pelanggan WHERE email='$no_telp'");
+        $cek = mysqli_query($koneksi, "SELECT * FROM pelanggan WHERE no_telpon='$no_telp'");
 
         if(mysqli_num_rows($cek) == 0){
+            // pelanggan baru
             mysqli_query($koneksi, "
-                INSERT INTO pelanggan (email, nama, jenis, status)
+                INSERT INTO pelanggan (no_telpon, nama, jenis, status)
                 VALUES ('$no_telp', '$nama', '$jenis', 'Aktif')
             ");
         } else {
+            // pelanggan lama → update jenis & status
             mysqli_query($koneksi, "
                 UPDATE pelanggan 
                 SET nama='$nama', jenis='$jenis', status='Aktif'
-                WHERE email='$no_telp'
+                WHERE no_telpon='$no_telp'
             ");
         }
 
@@ -103,7 +103,7 @@ if (mysqli_query($koneksi, $sql)) {
             ");
 
             /* ==========================================
-               === UPDATE STOK + SIMPAN DETAIL LAPORAN ===
+               === [TAMBAHAN DARI CODINGAN 1] UPDATE STOK ===
                ========================================== */
 
             // Ambil id produk berdasarkan nama
@@ -114,7 +114,6 @@ if (mysqli_query($koneksi, $sql)) {
             $id_produk = $p['id'];
 
             if ($id_produk) {
-
                 // Kurangi stok
                 mysqli_query($koneksi, "
                     UPDATE produk 
@@ -124,15 +123,19 @@ if (mysqli_query($koneksi, $sql)) {
             }
         }
 
-        // TAMBAHKAN KODE INI: Masukkan data ke tabel laporan
+        /* ==================================================
+           === [TAMBAHAN DARI CODINGAN 1] SIMPAN KE LAPORAN ===
+           ================================================== */
+        
+        // Masukkan data ke tabel laporan
         mysqli_query($koneksi, "
-            INSERT INTO laporan (nama_pembeli, email, alamat, total_harga, tanggal, metode_pembayaran, status)
+            INSERT INTO laporan (nama_pembeli, no_telpon, alamat, total_harga, tanggal, metode_pembayaran, status)
             VALUES ('$nama', '$no_telp', '$alamat', '$total', NOW(), '$metode', '$status')
         ");
         
         $id_laporan = mysqli_insert_id($koneksi);
         
-        // TAMBAHKAN KODE INI: Masukkan detail produk terjual ke detail_laporan
+        // Masukkan detail produk terjual ke detail_laporan
         foreach ($items as $it) {
             if (trim($it) === '') continue;
             
@@ -172,23 +175,24 @@ if (mysqli_query($koneksi, $sql)) {
         }
 
         $pesan = 
-"Hallo *$nama* 👋
+"Hallo $nama 👋
 
-Terima kasih sudah memesan di *Roti 515* 🍞✨
+Terima kasih sudah memesan di Roti 515 🍞✨
 
-🧾 *ID Pesanan:* #$id_pesanan
-📦 *Detail Pesanan:*
+🧾 ID Pesanan: #$id_pesanan
+📦 Detail Pesanan:
  $teks_item
-💰 *Total:* Rp" . number_format($total,0,',','.') . "
+💰 Total: Rp" . number_format($total,0,',','.') . "
 
-📍 *Alamat:* $alamat
-👥 *Jenis Pelanggan:* $jenis
-💳 *Metode Pembayaran:* $metode
+📍 Alamat: $alamat
+👥 Jenis Pelanggan: $jenis
+💳 Metode Pembayaran: $metode
 
-Pesanan kamu sudah kami terima dan sedang diproses ✔️
+Pesanan kamu sudah kami terima dan sedang diproses ✔
 Terima kasih 🙏🙂
 
-*_Note : Kirim Bukti Pembayaran di nomer ini_*";
+*_Note : Kirim Bukti Pembayaran di nomer ini (jika transfer)_*";
+
         kirim_wa($no_telp, $pesan, $token);
 
         echo 'success';

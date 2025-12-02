@@ -14,6 +14,61 @@ include('../database/koneksi.php');
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Admin - Roti 515</title>
   <link rel="stylesheet" href="iya.css">
+  <style>
+    /* Dropdown menu styling */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      right: 0;
+    }
+    
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .dropdown-content a:hover {
+      background-color: #f1f1f1
+    }
+    
+    .show {
+      display: block;
+    }
+    
+    .btn-aksi {
+      background-color: #4CAF50;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .btn-hapus {
+      background-color: #f44336;
+      color: white;
+    }
+    
+    .btn-detail {
+      background-color: #2196F3;
+      color: white;
+      padding: 6px 12px;
+      text-decoration: none;
+      border-radius: 4px;
+      display: inline-block;
+    }
+  </style>
 </head>
 <body>
   <div class="sidebar">
@@ -81,23 +136,33 @@ include('../database/koneksi.php');
             <th>Metode</th>
             <th>Status</th>
             <th>Tanggal</th>
-            <th>Detail</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
         <?php
-$query = mysqli_query($koneksi, "SELECT * FROM pesanan ORDER BY tanggal DESC");
+ $query = mysqli_query($koneksi, "SELECT * FROM pesanan ORDER BY tanggal DESC");
 
 while ($pesanan = mysqli_fetch_assoc($query)) {
 
-    echo "<tr>";
+    // Update otomatis hanya jika pesanan masih Pending
+    if ($pesanan['metode_pembayaran'] == 'transfer' 
+        && !empty($pesanan['bukti_pembayaran']) 
+        && $pesanan['status'] == 'Pending') {
+
+        mysqli_query($koneksi, "UPDATE pesanan SET status='Sudah Dibayar' WHERE id='".$pesanan['id']."'");
+        $pesanan['status'] = 'Sudah Dibayar';
+    }
+
+    $class = ($pesanan['status'] == 'Dibatalkan') ? "style='text-decoration: line-through; opacity:0.5;'" : "";
+    echo "<tr $class>";
     echo "<td>".$pesanan['id']."</td>";
     echo "<td>".$pesanan['nama_pembeli']."</td>";
-    echo "<td>".$pesanan['email']."</td>";
+    echo "<td>".$pesanan['no_telpon']."</td>";
     echo "<td>".$pesanan['alamat']."</td>";
     echo "<td>Rp".number_format($pesanan['total_harga'],0,',','.')."</td>";
     echo "<td>".$pesanan['metode_pembayaran']."</td>";
-    echo "<td class='status ".$pesanan['status']."'>".$pesanan['status']."</td>";
+    echo "<td>".$pesanan['status']."</td>";
     echo "<td>".$pesanan['tanggal']."</td>";
 
     echo "<td>";
@@ -108,37 +173,80 @@ while ($pesanan = mysqli_fetch_assoc($query)) {
 
     } elseif ($status == 'Pending') {
         ?>
-
-        <form action="ubah_status.php" method="POST" style="display:inline-block;margin-bottom:5px;">
-            <input type="hidden" name="id" value="<?= $pesanan['id'] ?>">
-            <input type="hidden" name="nama_pembeli" value="<?= $pesanan['nama_pembeli'] ?>">
-            <input type="hidden" name="email" value="<?= $pesanan['email'] ?>">
-            <button type="submit" name="selesai" class="btn-detail" style="background:#00c853;">Selesai</button>
-        </form>
-
-        <form action="ubah_status.php" method="POST" style="display:inline-block;">
-            <input type="hidden" name="id" value="<?= $pesanan['id'] ?>">
-            <input type="hidden" name="nama_pembeli" value="<?= $pesanan['nama_pembeli'] ?>">
-            <input type="hidden" name="email" value="<?= $pesanan['email'] ?>">
-            <button type="submit" name="batalkan" class="btn-detail" style="background:#e53935;">Batalkan</button>
-        </form>
-
+        <div class="dropdown">
+          <button onclick="toggleDropdown('dropdown<?= $pesanan['id'] ?>')" class="btn-aksi">👁</button>
+          <div id="dropdown<?= $pesanan['id'] ?>" class="dropdown-content">
+            <form action="ubah_status.php" method="POST" style="margin:0;">
+                <input type="hidden" name="id" value="<?= $pesanan['id'] ?>">
+                <input type="hidden" name="nama_pembeli" value="<?= $pesanan['nama_pembeli'] ?>">
+                <input type="hidden" name="no_telpon" value="<?= $pesanan['no_telpon'] ?>">
+                <button type="submit" name="selesai" style="background:#00c853;color:white;border:none;width:100%;text-align:left;padding:12px 16px;cursor:pointer;">Selesai</button>
+            </form>
+            <form action="ubah_status.php" method="POST" style="margin:0;">
+                <input type="hidden" name="id" value="<?= $pesanan['id'] ?>">
+                <input type="hidden" name="nama_pembeli" value="<?= $pesanan['nama_pembeli'] ?>">
+                <input type="hidden" name="no_telpon" value="<?= $pesanan['no_telpon'] ?>">
+                <button type="submit" name="batalkan" style="background:#e53935;color:white;border:none;width:100%;text-align:left;padding:12px 16px;cursor:pointer;">Batalkan</button>
+            </form>
+          </div>
+        </div>
         <?php
 
     } else {
-        echo "<a href='detail_pesanan.php?id=".$pesanan['id']."' class='btn-detail'>Lihat</a>";
+        if ($pesanan['status'] == 'Dibatalkan') {
+            ?>
+            <div class="dropdown">
+              <button onclick="toggleDropdown('dropdown<?= $pesanan['id'] ?>')" class="btn-aksi">👁</button>
+              <div id="dropdown<?= $pesanan['id'] ?>" class="dropdown-content">
+                <a href="detail_pesanan.php?id=<?= $pesanan['id'] ?>" class="btn-detail" style="background:#2196F3;color:white;width:100%;text-align:left;padding:12px 16px;box-sizing:border-box;">Lihat Detail</a>
+                <form action="hapus_pesanan.php" method="POST" style="margin:0;" onsubmit="return confirm('Yakin ingin menghapus pesanan ini?')">
+                    <input type="hidden" name="id" value="<?= $pesanan['id'] ?>">
+                    <button type="submit" class="btn-hapus" style="width:100%;text-align:left;padding:12px 16px;cursor:pointer;">Hapus Pesanan</button>
+                </form>
+              </div>
+            </div>
+            <?php
+        } else {
+            ?>
+            <div class="dropdown">
+              <button onclick="toggleDropdown('dropdown<?= $pesanan['id'] ?>')" class="btn-aksi">👁</button>
+              <div id="dropdown<?= $pesanan['id'] ?>" class="dropdown-content">
+                <a href="detail_pesanan.php?id=<?= $pesanan['id'] ?>" class="btn-detail" style="background:#2196F3;color:white;width:100%;text-align:left;padding:12px 16px;box-sizing:border-box;">Lihat Detail</a>
+              </div>
+            </div>
+            <?php
+        }
     }
 
     echo "</td>";
     echo "</tr>";
-
 }
-
 ?>
 
         </tbody>
       </table>
     </section>
   </div>
+
+  <script>
+    // Toggle dropdown menu
+    function toggleDropdown(id) {
+      document.getElementById(id).classList.toggle("show");
+    }
+    
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+      if (!event.target.matches('.btn-aksi')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>
 </body>
 </html>

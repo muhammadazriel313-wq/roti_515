@@ -9,6 +9,8 @@ include('database/koneksi.php');
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keranjang Belanja - Roti 515</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="satu.css">
+  <script defer src="satu.js"></script>
   <style>
     .modal {
       display: none;
@@ -55,22 +57,50 @@ include('database/koneksi.php');
       border-radius: 4px;
       padding: 5px;
     }
+    
   </style>
 </head>
 <body>
-<header class="navbar">
-  <div class="logo">ROTI<span>515</span></div>
+  <!-- Header -->
+ <header class="navbar">
+
+  <!-- BAGIAN YANG BISA DIKLIK -->
+  <div class="nav-toggle" id="toggleMenu">
+      <img src="logo 515.png" id="logoMenu">
+      <div class="logo">ROTI<span>515</span></div>
+  </div>
+   <!-- Hamburger Menu (mobile only) -->
+<div class="hamburger" id="hamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+
+  <!-- MENU NAVBAR -->
   <nav>
-    <ul>
-      <li><a href="index.html">Beranda</a></li>
-      <li><a href="tentang.php">Tentang</a></li>
-      <li><a href="produk.php">Produk</a></li>
-      <li><a href="kontak.php">Kontak</a></li>
-      <li class="cart-icon"><a href="keranjang.php">🛒 Keranjang</a></li>
+    <ul id="menuList">
+      <li><a href="index.php" class="nav-link">Beranda</a></li>
+      <li><a href="tentang.php" class="nav-link">Tentang</a></li>
+      <li><a href="produk.php" class="nav-link">Produk</a></li>
+      <li><a href="kontak.php" class="nav-link">Kontak</a></li>
+      <li class="cart-icon">
+        <a href="keranjang.php" class="nav-link">🛒 Keranjang</a>
+      </li>
     </ul>
   </nav>
 </header>
 
+  <!-- Kotak menu mobile overlay -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="index.php">Beranda</a></li>
+    <li><a href="tentang.php">Tentang</a></li>
+    <li><a href="produk.php">Produk</a></li>
+    <li><a href="kontak.php">Kontak</a></li>
+    <li><a href="keranjang.php">🛒 Keranjang</a></li>
+  </ul>
+</div>
 <section id="produk" class="produk section">
   <h2>Belanja Produk</h2>
 
@@ -196,8 +226,10 @@ switch ($p['nama_produk']) {
   <label>Nama</label>
   <input type="text" name="nama" required style="padding:6px;border-radius:5px;border:1px solid #ccc;">
   
-  <label>Nomor Telp / WA</label>
+    <label>Nomor Telp / WA</label>
   <input type="tel" name="no_telp" required style="padding:6px;border-radius:5px;border:1px solid #ccc;">
+  <!-- PERUBAHAN: Menambahkan keterangan format nomor telepon -->
+  <small style="font-size: 12px; color: #666; display: block; margin-top: 5px;">Cth: 6281234567890 (bukan 0 atau +62)</small>
   
   <label>Alamat</label>
   <textarea name="alamat" required style="padding:6px;border-radius:5px;border:1px solid #ccc;"></textarea>
@@ -211,7 +243,7 @@ switch ($p['nama_produk']) {
 
   <div id="transferArea" style="display:none; margin-top:10px;">
     <p><strong>Transfer ke rekening:</strong></p>
-    <p id="noRek">BRI  a.n. Roti 515</p>
+    <p id="noRek">BRI  642-3098-765-67 a.n. Roti 515</p>
       <p>(Silahkan Upload Bukti Pembayaran di WA Kami)</p>
   </div>
 
@@ -274,6 +306,22 @@ document.getElementById("checkout").addEventListener("click", function(e) {
   // Jika tidak ada error → buka modal checkout normal
   document.getElementById("checkoutModal").style.display = "block";
 });
+const hamburger = document.getElementById("hamburger");
+const menu = document.querySelector("nav ul");
+
+hamburger.addEventListener("click", () => {
+  menu.classList.toggle("show");
+  hamburger.classList.toggle("active");
+});
+
+// Tutup menu saat klik link
+menu.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    menu.classList.remove("show");
+    hamburger.classList.remove("active");
+  });
+});
+
 </script>
 
 <script src="keranjang.js"></script>
