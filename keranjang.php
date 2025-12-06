@@ -191,9 +191,8 @@ switch ($p['nama_produk']) {
 </section>
 
 
-<!-- ======================= -->
+
 <!--      MODAL CHECKOUT     -->
-<!-- ======================= -->
 <div id="checkoutModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
@@ -276,7 +275,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // --- LOGIKA UNTUK POPUP PERINGATAN (STOK / KOSONG) ---
   document.querySelector(".closeStok").onclick = () => {
     popupStok.style.display = "none";  
-    // Tidak perlu menutup checkoutModal di sini, karena jika keranjang kosong, modal tidak akan pernah terbuka
   };
   
   // --- LOGIKA UNTUK HAMBURGER MENU ---
@@ -356,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
           finalJenisCustomer = 'perorangan';
         }
-      }
+      }  
 
       // Atur nilai dropdown dan tampilan area mitra
       jenisCustomerSelect.value = finalJenisCustomer;
